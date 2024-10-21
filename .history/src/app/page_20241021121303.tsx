@@ -1,5 +1,5 @@
 // pages/index.tsx
-import Map from "../components/Map";
+import MapComponent from "../components/MapComponent";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -19,7 +19,7 @@ export default function Home() {
     <div className="p-10">
       <h1 className="text-3xl font-bold mb-5">Draw Your Property</h1>
       <p>Click to add points. Double-click to complete the boundary.</p>
-      <Map onPolygonDrawn={handlePolygonDrawn} />
+      <MapComponent onPolygonDrawn={handlePolygonDrawn} />
     </div>
   );
 }
