@@ -14,6 +14,7 @@ export default function HomePage() {
 
   return (
     <div className="space-y-6">
+      <h2 className="text-2xl font-bold">Draw Your Property Boundaries</h2>
       <MapInput />
       <button
         onClick={handleNext}

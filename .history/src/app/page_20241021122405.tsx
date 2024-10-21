@@ -3,7 +3,9 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 
-import MapInput from "@/components/MapInput";
+const MapComponent = dynamic(() => import("@/components/MapComponent"), {
+  ssr: false,
+});
 
 export default function HomePage() {
   const router = useRouter();
@@ -14,7 +16,8 @@ export default function HomePage() {
 
   return (
     <div className="space-y-6">
-      <MapInput />
+      <h2 className="text-2xl font-bold">Draw Your Property Boundaries</h2>
+      <MapComponent />
       <button
         onClick={handleNext}
         className="bg-blue-500 text-white p-2 rounded"
