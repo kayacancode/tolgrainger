@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { MapContainer, TileLayer, FeatureGroup, useMap } from 'react-leaflet';
 import { EditControl } from "react-leaflet-draw";
 import L from 'leaflet';
@@ -17,31 +17,15 @@ const MapComponent = () => {
     const captureArea = () => {
       if (map && polygon) {
         map.fitBounds(polygon.getBounds());
-        
-        const checkTilesLoaded = () => {
-          const container = map.getContainer();
-          const tilesLoaded = container.querySelectorAll('.leaflet-tile-loaded').length > 0;
-          
-          if (tilesLoaded) {
-            setTimeout(() => {
-              html2canvas(container, {
-                useCORS: true,
-                allowTaint: true,
-                foreignObjectRendering: true
-              }).then(canvas => {
-                const img = canvas.toDataURL("image/png");
-                const link = document.createElement('a');
-                link.href = img;
-                link.download = 'map-area.png';
-                link.click();
-              });
-            }, 500); // Short delay to ensure everything is rendered
-          } else {
-            setTimeout(checkTilesLoaded, 100); // Check again after 100ms
-          }
-        };
-
-        setTimeout(checkTilesLoaded, 1000); // Initial delay to allow panning
+        setTimeout(() => {
+          html2canvas(document.querySelector(".leaflet-container")).then(canvas => {
+            const img = canvas.toDataURL("image/png");
+            const link = document.createElement('a');
+            link.href = img;
+            link.download = 'map-area.png';
+            link.click();
+          });
+        }, 1000); // Wait for map to finish panning
       }
     };
 
