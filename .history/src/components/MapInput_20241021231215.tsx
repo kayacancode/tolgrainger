@@ -66,7 +66,7 @@ const MapComponent = () => {
       <MapContainer
         center={[51.505, -0.09]}
         zoom={13}
-        style={{ height: '1000px', width: '100%' }}
+        style={{ height: '100%', width: '100%' }}
         ref={mapRef}
       >
         <LayersControl position="topright">
@@ -90,14 +90,13 @@ const MapComponent = () => {
             }}
           />
         </FeatureGroup>
-        {/* <button
+        <button
           onClick={captureArea}
           style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}
         >
           Capture Area
-        </button> */}
+        </button>
       </MapContainer>
-      <div className='text-center'> 
       {area !== null && (
         <p>
           Area: {area.toFixed(4)} hectares ({(area * 2.47105).toFixed(4)} acres)
@@ -115,7 +114,6 @@ const MapComponent = () => {
           </ul>
         </div>
       )}
-    </div>
     </div>
   );
 };

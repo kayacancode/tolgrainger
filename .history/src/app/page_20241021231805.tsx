@@ -21,7 +21,7 @@ export default function HomePage() {
       <div className="float-right p-10 justify-center ">
       <button
         onClick={handleNext}
-        className="bg-blue-500 text-white p-2 rounded  text-lg text-center"
+        className="bg-blue-500 text-white p-2 rounded text-center"
       >
         Next
       </button>

@@ -90,12 +90,12 @@ const MapComponent = () => {
             }}
           />
         </FeatureGroup>
-        {/* <button
+        <button
           onClick={captureArea}
           style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}
         >
           Capture Area
-        </button> */}
+        </button>
       </MapContainer>
       <div className='text-center'> 
       {area !== null && (

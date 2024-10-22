@@ -14,14 +14,14 @@ export default function HomePage() {
 
   return (
     <div className="">
-                  <h1 className='text-lg font-bold text-center py-10'>Draw your property lines</h1>
+                  <h1 className='text-lg font-bold'>Draw your property lines</h1>
 
+      <div className="h-screen  items-center justify-center">
 
       <MapInput />
-      <div className="float-right p-10 justify-center ">
       <button
         onClick={handleNext}
-        className="bg-blue-500 text-white p-2 rounded  text-lg text-center"
+        className="bg-blue-500 text-white p-2 rounded"
       >
         Next
       </button>

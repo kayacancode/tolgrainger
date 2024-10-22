@@ -13,7 +13,7 @@ export default function ResultPage() {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">Tree Planting Results</h2>
-      {/* <MapWithTrees treeCount={treeCount} /> */}
+      <MapWithTrees treeCount={treeCount} />
       <input
         type="range"
         min="0"
