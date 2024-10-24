@@ -7,17 +7,18 @@ import 'leaflet-draw/dist/leaflet.draw.css';
 import html2canvas from 'html2canvas';
 
 const MapComponent = () => {
-  const [area, setArea] = useState(null);
-  const [polygon, setPolygon] = useState(null);
-  const [coordinates, setCoordinates] = useState([]); // Store coordinates
-  const mapRef = useRef();
+  const [area, setArea] = useState<number | null>(null);
+  const [polygon, setPolygon] = useState<L.Polygon | null>(null);
+  const [coordinates, setCoordinates] = useState<{ lat: number; lng: number }[]>([]);
+  const [popupVisible, setPopupVisible] = useState(false); // State for popup visibility
+  const mapRef = useRef<L.Map | null>(null);
 
   const captureArea = () => {
     if (mapRef.current && polygon) {
       mapRef.current.fitBounds(polygon.getBounds());
 
       const checkTilesLoaded = () => {
-        const container = mapRef.current.getContainer();
+        const container = mapRef.current!.getContainer();
         const tilesLoaded = container.querySelectorAll('img.leaflet-tile-loaded').length > 0;
 
         if (tilesLoaded) {
@@ -42,7 +43,7 @@ const MapComponent = () => {
     }
   };
 
-  const handleCreated = (e) => {
+  const handleCreated = (e: any) => {
     const { layer } = e;
     setPolygon(layer);
 
@@ -58,14 +59,45 @@ const MapComponent = () => {
       const areaInSquareMeters = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
       const areaInHectares = areaInSquareMeters / 10000;
       setArea(areaInHectares);
+      setPopupVisible(true); // Show popup when area is calculated
     }
   };
 
   return (
-    <div className=''>
+    <div className='relative'>
+      {/* Popup for area and coordinates */}
+      {popupVisible && (
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white shadow-md rounded p-4 z-10">
+          <h3 className="font-bold">Area and Coordinates</h3>
+          {area !== null && (
+            <p>
+              Area: {area.toFixed(4)} hectares ({(area * 2.47105).toFixed(4)} acres)
+            </p>
+          )}
+          {coordinates.length > 0 && (
+            <div>
+              <h4 className="font-semibold">Coordinates:</h4>
+              <ul>
+                {coordinates.map((coord, index) => (
+                  <li key={index}>
+                    Lat: {coord.lat.toFixed(6)}, Lng: {coord.lng.toFixed(6)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <button
+            className="mt-2 text-red-500"
+            onClick={() => setPopupVisible(false)}
+          >
+            Close
+          </button>
+        </div>
+      )}
+
       <MapContainer
-        center={[41.7215294, -93.6577747]}
-        zoom={40}
+        center={[41.8780, -93.0977]}
+        zoom={13}
         style={{ height: '1000px', width: '100%' }}
         ref={mapRef}
       >
@@ -90,32 +122,7 @@ const MapComponent = () => {
             }}
           />
         </FeatureGroup>
-        {/* <button
-          onClick={captureArea}
-          style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}
-        >
-          Capture Area
-        </button> */}
       </MapContainer>
-      <div className='text-center'> 
-      {area !== null && (
-        <p>
-          Area: {area.toFixed(4)} hectares ({(area * 2.47105).toFixed(4)} acres)
-        </p>
-      )}
-      {coordinates.length > 0 && (
-        <div>
-          <h3>Coordinates:</h3>
-          <ul>
-            {coordinates.map((coord, index) => (
-              <li key={index}>
-                Lat: {coord.lat.toFixed(6)}, Lng: {coord.lng.toFixed(6)}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
     </div>
   );
 };

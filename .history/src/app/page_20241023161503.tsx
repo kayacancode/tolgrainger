@@ -18,7 +18,7 @@ export default function HomePage() {
       <Sidebar />
 
       {/* Main content */}
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 p-4 overflow-auto">
         <h1 className="text-lg font-bold text-center py-10">
           Draw your property lines
         </h1>

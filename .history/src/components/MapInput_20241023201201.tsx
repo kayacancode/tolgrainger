@@ -65,7 +65,7 @@ const MapComponent = () => {
     <div className=''>
       <MapContainer
         center={[41.7215294, -93.6577747]}
-        zoom={40}
+        zoom={13}
         style={{ height: '1000px', width: '100%' }}
         ref={mapRef}
       >

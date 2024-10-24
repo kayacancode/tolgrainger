@@ -15,7 +15,7 @@ export default function HomePage() {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <Sidebar />
+      {/* <Sidebar /> */}
 
       {/* Main content */}
       <div className="flex-1 overflow-auto">

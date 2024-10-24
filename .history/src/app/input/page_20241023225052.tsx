@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import axios from 'axios';
 
-
 export default function CarbonInputPage() {
   const [credits, setCredits] = useState<number | "">("");
   const router = useRouter();

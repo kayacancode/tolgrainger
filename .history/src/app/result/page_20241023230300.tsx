@@ -23,7 +23,6 @@ const Results = () => {
             <button onClick={handleRunScript}>Run Script</button>
             {response && <div>Response: {JSON.stringify(response)}</div>}
             {error && <div>Error: {error}</div>}
-            <h1>{response}</h1>
         </div>
     </div>
   );
