@@ -21,12 +21,9 @@ const Results = () => {
       <h1 className="text-2xl font-bold mb-4">Python Script Output</h1>
       <div>
             <button onClick={handleRunScript}>Run Script</button>
-            {response && (
-              <div>
-                <pre>{response}</pre> {/* Display formatted output */}
-              </div>
-            )}
+            {response && <div>Response: {JSON.stringify(response)}</div>}
             {error && <div>Error: {error}</div>}
+            <h1>{response}</h1>
         </div>
     </div>
   );

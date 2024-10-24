@@ -137,7 +137,6 @@ text1 = """
 
 
     Your task is to generate a planting plan that optimizes carbon sequestration while adhering to local regulations.
-    **Please provide only the output in the exact format below without any additional explanations:**
 
     1. **Filter Plants:**  Review the provided `PlantsListBasedOnWeather` and cross-reference it with local regulations for the specified GPS location. Remove any invasive or prohibited plants from the list, and instead replace them with known plants that thrive and sequester the most carbon for the given area.
 

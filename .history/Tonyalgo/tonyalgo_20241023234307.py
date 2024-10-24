@@ -74,7 +74,6 @@ def prepare_for_vertex_ai(plant_data):
     return plant_list
 
 
-
 # ---------- Step 2: Updated Generative AI Script ----------
 def generate(gps_location, plants_list, land_size, requested_carbon_credits, time_frame):
     vertexai.init(project="tree-of-life-algo-439316", location="us-central1")
@@ -137,7 +136,6 @@ text1 = """
 
 
     Your task is to generate a planting plan that optimizes carbon sequestration while adhering to local regulations.
-    **Please provide only the output in the exact format below without any additional explanations:**
 
     1. **Filter Plants:**  Review the provided `PlantsListBasedOnWeather` and cross-reference it with local regulations for the specified GPS location. Remove any invasive or prohibited plants from the list, and instead replace them with known plants that thrive and sequester the most carbon for the given area.
 

@@ -73,6 +73,15 @@ def prepare_for_vertex_ai(plant_data):
     plant_list = plant_data[['SCINAME', 'Carbon_Sequestration_Tier']].to_dict('records')
     return plant_list
 
+def extract_output(response_text):
+    # Use regex to extract the relevant section
+    output_regex = r"Output:\s*```(.*?)```"
+    match = re.search(output_regex, response_text, re.DOTALL)
+    
+    if match:
+        return match.group(1).strip()
+    else:
+        return "No valid output found."
 
 
 # ---------- Step 2: Updated Generative AI Script ----------
@@ -110,11 +119,11 @@ def generate(gps_location, plants_list, land_size, requested_carbon_credits, tim
         stream=True,
     )
 
-    for response in response_stream:
-        print(response.text, end="")  # Optional: Print to console for debugging
-        responses.append(response.text)  # Store response text
-
-    return "\n".join(responses)  # Return all responses as a single string
+    for response in responses:
+        full_response = response.text
+        print(full_response, end="")
+    
+        return extract_output(full_response)  # Return extracted output # Return all responses as a single string
 
 
 text1 = """
@@ -137,7 +146,6 @@ text1 = """
 
 
     Your task is to generate a planting plan that optimizes carbon sequestration while adhering to local regulations.
-    **Please provide only the output in the exact format below without any additional explanations:**
 
     1. **Filter Plants:**  Review the provided `PlantsListBasedOnWeather` and cross-reference it with local regulations for the specified GPS location. Remove any invasive or prohibited plants from the list, and instead replace them with known plants that thrive and sequester the most carbon for the given area.
 
